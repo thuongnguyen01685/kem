@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 body{
-  margin: 20px 40px;
-  font-size: 1.2rem;
+  
   letter-spacing: 1px;
   background: #fafafa;
 }
@@ -28,6 +27,7 @@ nav{
 nav ul{
   display: flex;
   align-items: center;
+
 }
 nav li{
   margin-left: 20px;
@@ -51,11 +51,12 @@ form h2{
 }
 form{
   width: 360px;
-  margin: 0 auto;
+  margin: 60 auto;
   padding: 30px;
   box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
   border-radius: 10px;
   background: white;
+
 }
 input{
   padding: 10px 12px;
@@ -63,6 +64,7 @@ input{
   border: 1px solid #ddd;
   font-size: 1em;
   width: 100%;
+
 }
 label{
   display: block;
@@ -89,10 +91,12 @@ button{
 header{
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 header img{
-  width: 250px;
-  margin-right: 40px;
+  width: 225px;
+  margin-right: 550px;
+  flex-wrap: wrap;
 }
 header h2{
   font-size: 3em;
@@ -119,6 +123,7 @@ header .btn{
   row-gap: 80px;
   margin: 80PX AUTO;
   max-width: 1200px;
+  flex-wrap: wrap;
 }
 .recipe{
   display: inline-block;
@@ -126,14 +131,33 @@ header .btn{
   background: white;
   position: relative;
   text-align: center;
-  padding: 0 20px 30px 20px
+  padding: 0 20px 30px 20px;
+  flex-wrap: wrap;
 }
 .recipe img{
   width: 100px;
   margin: -30px auto 20px;
+  flex-wrap: wrap;
 }
-footer{
+.footer{
   text-align: center;
-  margin-top: 120px;
-  color: #aaa;
+  color: white;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #343a40;
+   height:125px;
+   margin-top: 100px;
 }
+.container{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 40px;
+}
+.footer1{
+  padding-top: 5px;
+  color: white;
+  
+}
+

@@ -1,15 +1,17 @@
 <%- include('partials/header'); -%>
 
-<form action="/signup">
-  <h2>Login</h2>
-  <label for="email">Email</label>
-  <input type="text" name="email"  />
-  <div class="email error"></div>
-  <label for="password">Password</label>
-  <input type="password" name="password"  />
-  <div class="password error"></div>
-  <button>login</button>
-</form>
+  <form action="/login">
+    <h2>Login</h2>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" name="email"  />
+      <div class="email error"></div>
+    </div>  
+    <label for="password">Password</label>
+    <input type="password" name="password"  />
+    <div class="password error"></div>
+    <button class="btn btn-primary">login</button>
+  </form>
 
 <%- include('partials/footer'); -%>
 
