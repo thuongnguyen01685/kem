@@ -1,0 +1,49 @@
+<%- include('partials/header'); -%>
+<div class="col-lg-12">
+	<div class="container"> 
+		<div class="table-responsive">       
+			  <table class = "table table-hover">
+			    <thead>
+			      <tr>
+			      	<th>Name</th>
+			        <th>Email</th>
+			        <th>Passwword</th>
+			        <th>Active</th>
+			      </tr>
+			    </thead>
+			    <% users.forEach( function(user){%>
+			    	<tr>
+			    		<td><%= user.username %></td>
+			    		<td><%= user.email %></td>
+			    		<td> Mật khẩu mặc định 123456 </td>
+			    		<td>
+			    			<div class="container">
+					    		<button type="button" class="btn btn-warning btn-xs" onclick="updateUser('<%= user._id %>')"><a href="/signup">Edit</a></button>
+					    		<button type="button" class="btn btn-danger btn-xs" onclick="removeUser('<%= user._id %>')">Delete</button>
+					    	</div>
+					   	</td>
+			    	</tr>
+			    <% }) %>
+			  </table>
+		</div>
+	</div>
+</div>
+<%- include('partials/footer'); -%>
+
+<script>
+	function updateUser(id) {
+		fetch('/user/' + id, {
+			method: 'PUT',
+		}).then(function(response) {
+			res.render('signup');
+			console.log(response.status);
+		});
+	}
+	function removeUser(id) {
+		fetch('/user/' + id, {
+			method: 'DELETE',
+		}).then(function(response) {
+			console.log(response.status);
+		});
+	}
+</script>

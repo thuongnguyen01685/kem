@@ -53,10 +53,10 @@ module.exports.login_get = (req, res) => {
 }
 
 module.exports.signup_post = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, username } = req.body;
 
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ email, password, username });
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
@@ -91,4 +91,28 @@ module.exports.logout_get = (req, res) => {
 
 module.exports.aboutme_get = (req, res) => {
   res.render('aboutme');
+}
+
+module.exports.user_get = async(req, res) => {
+  var users = await User.find();
+    res.render('user',{
+      users:users
+    });
+}
+//sua user by id 
+module.exports.user_update = (req, res) =>{
+  User.findById(req.params.id, (err, user) =>{
+    if(!err){
+      res.render('signup', {
+        user: user.toJSON()
+      });
+    }
+  });
+}
+// xoa user by id
+module.exports.user_delete = (req, res) => {
+  User.findOneAndDelete({ _id: req.params.id }, (err, doc) => {
+    // res.status(200).json({ message: 'Thanh cong ' });
+    res.render('user');
+  });
 }
