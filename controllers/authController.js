@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // handle errors
 const handleErrors = (err) => {
@@ -99,20 +100,36 @@ module.exports.user_get = async(req, res) => {
       users:users
     });
 }
-//sua user by id 
-module.exports.user_update = (req, res) =>{
-  User.findById(req.params.id, (err, user) =>{
+module.exports.upusers_get = (req, res) =>{
+  User.findById(req.params.id,(err, user) =>{
     if(!err){
-      res.render('signup', {
+      res.render('upusers', {
         user: user.toJSON()
       });
     }
   });
 }
+//sua user by id 
+module.exports.user_update = async (req, res) =>{
+  const salt = await bcrypt.genSalt();
+  req.body.password = await bcrypt.hash(req.body.password, salt);
+  User.updateOne({ _id:req.params.id }, req.body, {new:true},(err, doc) =>{
+    if(!err){
+     res.status(200).json({ message: "OK" });
+    } 
+    else{
+      console.log(err);
+      res.render('upusers', {
+          viewTitle: "Error updated"
+      });
+    }
+ });
+
+  }
 // xoa user by id
 module.exports.user_delete = (req, res) => {
   User.findOneAndDelete({ _id: req.params.id }, (err, doc) => {
     // res.status(200).json({ message: 'Thanh cong ' });
-    res.render('user');
+    return res.status(200).send("OK");
   });
 }

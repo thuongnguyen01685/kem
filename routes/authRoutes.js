@@ -12,7 +12,8 @@ router.post('/login', authController.login_post);
 router.get('/logout', authController.logout_get);
 router.get('/aboutme', authController.aboutme_get);
 router.get('/user',requireAuth ,authController.user_get);
-router.get('/user/:id', authController.user_update);
+router.get('/user/:id',authController.upusers_get);
+router.put('/user/:id', authController.user_update);
 router.delete('/user/:id', authController.user_delete);
 
 

@@ -1,25 +1,30 @@
 <%- include('partials/header'); -%>
 
-<form action="/signup" method="POST">
-    <h2>Sign up</h2>
+<form>
+    <h2>Update</h2>
     <div class="form-group">
       <label for="username">Name</label>
-      <input type="text" name="username" />
+      <input type="text" name="username" value="<%=user.username%>"/>
       <div class=" username error"></div>
 
       <label for="email">Email</label>
-      <input type="text" name="email" />
+      <input type="text" name="email" value="<%=user.email%>"/>
       <div class="email error"></div>
     </div> 
     <label for="password">Password</label>
-    <input type="password" name="password" />
+    <input type="password" name="password"  value="<%=user.password%>"/>
     <div class="password error"></div>
-    <button class="btn btn-primary">Sign up</button>
+    <button class="btn btn-primary">Update</button>
   </form>
 
 <%- include('partials/footer'); -%>
 
 <script>
+  // GET USERID FROM ADDRESS BAR
+  var url = location.pathname;
+  var parameter = url.split("/");
+  var userid = parameter[parameter.length - 1];
+
   const form = document.querySelector('form');
   const usernameError = document.querySelector('.username.error');
   const emailError = document.querySelector('.email.error');
@@ -39,9 +44,9 @@
     const password = form.password.value;
 
     try {
-      const res = await fetch('/signup', { 
-        method: 'POST', 
-        body: JSON.stringify({ username, email, password }),
+      const res = await fetch('/user/' +  userid, { 
+        method: 'PUT', 
+        body: JSON.stringify({ username: username, email: email, password:password }),
         headers: {'Content-Type': 'application/json'}
       });
       const data = await res.json();
@@ -51,8 +56,8 @@
         emailError.textContent = data.errors.email;
         passwordError.textContent = data.errors.password;
       }
-      if (data.user) {
-        location.assign('/');
+      if (data) {
+        location.assign('/user');
       }
 
     }

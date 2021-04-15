@@ -161,3 +161,42 @@ header .btn{
   
 }
 
+ table img{
+  width: 300px;
+  margin: -30px auto 50px;
+  border-radius:15%;
+    -moz-border-radius:15%;
+    -webkit-border-radius:15%;
+}
+.content-center{
+  text-align: center;
+  margin-left: 40px;
+}
+.row1 img{
+  width: 200px;
+  margin: -10px 70px 30px;
+  border-radius:15%;
+    -moz-border-radius:15%;
+    -webkit-border-radius:15%;
+}
+.row2 img{
+  width: 200px;
+
+  text-align: center;
+  margin: -10px 80px 20px;
+  border-radius:15%;
+    -moz-border-radius:15%;
+    -webkit-border-radius:15%;
+}
+.row3 img{
+  width: 200px;
+
+  text-align: center;
+  margin: -10px 80px 20px;
+  border-radius:15%;
+    -moz-border-radius:15%;
+    -webkit-border-radius:15%;
+}
+
+
+

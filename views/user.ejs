@@ -18,7 +18,7 @@
 			    		<td> Mật khẩu mặc định 123456 </td>
 			    		<td>
 			    			<div class="container">
-					    		<button type="button" class="btn btn-warning btn-xs" onclick="updateUser('<%= user._id %>')"><a href="/signup">Edit</a></button>
+					    		<a href="/user/<%= user._id %>" class="btn btn-warning btn-xs">EDIT</a>
 					    		<button type="button" class="btn btn-danger btn-xs" onclick="removeUser('<%= user._id %>')">Delete</button>
 					    	</div>
 					   	</td>
@@ -31,19 +31,17 @@
 <%- include('partials/footer'); -%>
 
 <script>
-	function updateUser(id) {
-		fetch('/user/' + id, {
-			method: 'PUT',
-		}).then(function(response) {
-			res.render('signup');
-			console.log(response.status);
-		});
-	}
+	
 	function removeUser(id) {
 		fetch('/user/' + id, {
 			method: 'DELETE',
 		}).then(function(response) {
+			//console.log(response.status);
 			console.log(response.status);
+			if(response.status == 200) {
+				alert("Thanh cong");
+				location.assign('/user');
+			}
 		});
 	}
 </script>
