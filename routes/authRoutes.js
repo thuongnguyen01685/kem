@@ -15,6 +15,7 @@ router.get('/user',requireAuth ,authController.user_get);
 router.get('/user/:id',authController.upusers_get);
 router.put('/user/:id', authController.user_update);
 router.delete('/user/:id', authController.user_delete);
-
-
+// router.get('/search', authController.user_search);
+router.get('/search/:username', authController.user_search);
+router.get('/roomchat',requireAuth,authController.roomchat_get);
 module.exports = router;

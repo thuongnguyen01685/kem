@@ -11,9 +11,12 @@
     "git": "^0.1.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.23",
+    "socket.io": "^4.0.1",
     "validator": "^13.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
   "scripts": {
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"

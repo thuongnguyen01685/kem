@@ -62,11 +62,11 @@ module.exports.signup_post = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
   }
-  catch(err) {
+  catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
- 
+
 }
 
 module.exports.login_post = async (req, res) => {
@@ -77,7 +77,7 @@ module.exports.login_post = async (req, res) => {
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ user: user._id });
-  } 
+  }
   catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
@@ -94,15 +94,15 @@ module.exports.aboutme_get = (req, res) => {
   res.render('aboutme');
 }
 
-module.exports.user_get = async(req, res) => {
+module.exports.user_get = async (req, res) => {
   var users = await User.find();
-    res.render('user',{
-      users:users
-    });
+  res.render('user', {
+    users: users
+  });
 }
-module.exports.upusers_get = (req, res) =>{
-  User.findById(req.params.id,(err, user) =>{
-    if(!err){
+module.exports.upusers_get = (req, res) => {
+  User.findById(req.params.id, (err, user) => {
+    if (!err) {
       res.render('upusers', {
         user: user.toJSON()
       });
@@ -110,26 +110,53 @@ module.exports.upusers_get = (req, res) =>{
   });
 }
 //sua user by id 
-module.exports.user_update = async (req, res) =>{
+module.exports.user_update = async (req, res) => {
   const salt = await bcrypt.genSalt();
   req.body.password = await bcrypt.hash(req.body.password, salt);
-  User.updateOne({ _id:req.params.id }, req.body, {new:true},(err, doc) =>{
-    if(!err){
-     res.status(200).json({ message: "OK" });
-    } 
-    else{
+  User.updateOne({ _id: req.params.id }, req.body, { new: true }, (err, doc) => {
+    if (!err) {
+      res.status(200).json({ message: "OK" });
+    }
+    else {
       console.log(err);
       res.render('upusers', {
-          viewTitle: "Error updated"
+        viewTitle: "Error updated"
       });
     }
- });
+  });
 
-  }
+}
 // xoa user by id
 module.exports.user_delete = (req, res) => {
   User.findOneAndDelete({ _id: req.params.id }, (err, doc) => {
     // res.status(200).json({ message: 'Thanh cong ' });
     return res.status(200).send("OK");
   });
+}
+var employee = User.find({});
+module.exports.user_search = async (req, res, next) => {
+  // var username = req.body.username;
+  var username = req.params.username;
+
+  if (username != '') {
+    var filterParameter = { username: username }
+  }
+  else {
+    var filterParameter = {}
+  }
+
+  var employeeFilter = await User.find({ username: { '$regex': username } });
+
+  return res.status(200).json({ data: employeeFilter });
+  /*
+  var employeeFilter = await User.find({ username: username });
+
+  employee.exec(function (err, data) {
+    if (err) throw err;
+    res.render('user', { title: 'Employee Records', records: data });
+  });
+  */
+}
+module.exports.roomchat_get = (req, res) => {
+  res.render('roomchat');
 }
